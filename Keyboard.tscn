@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://l5leuyby4tp"]
+
+[ext_resource type="PackedScene" uid="uid://dgdb1texynduw" path="res://addons/godot-xr-tools/objects/virtual_keyboard.tscn" id="1_eto0w"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_x8iom"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_t75a1"]
+resource_local_to_scene = true
+size = Vector2(1.5, 0.558)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f13dk"]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hhgl"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_f13dk")
+texture_filter = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ebvqa"]
+resource_local_to_scene = true
+size = Vector3(1.5, 0.558, 0.02)
+
+[node name="Keyboard" type="Node3D"]
+
+[node name="PickableObject" parent="." instance=ExtResource("1_x8iom")]
+gravity_scale = 0.0
+
+[node name="VirtualKeyboard" parent="PickableObject" instance=ExtResource("1_eto0w")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Viewport" parent="PickableObject/VirtualKeyboard/Viewport2Din3D" index="0"]
+size = Vector2i(390, 145)
+
+[node name="Screen" parent="PickableObject/VirtualKeyboard/Viewport2Din3D" index="1"]
+mesh = SubResource("QuadMesh_t75a1")
+surface_material_override/0 = SubResource("StandardMaterial3D_2hhgl")
+
+[node name="StaticBody3D" parent="PickableObject/VirtualKeyboard/Viewport2Din3D" index="2"]
+screen_size = Vector2(1.5, 0.558)
+viewport_size = Vector2(390, 145)
+
+[node name="CollisionShape3D" parent="PickableObject/VirtualKeyboard/Viewport2Din3D/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_ebvqa")
+
+[editable path="PickableObject/VirtualKeyboard"]
+[editable path="PickableObject/VirtualKeyboard/Viewport2Din3D"]
