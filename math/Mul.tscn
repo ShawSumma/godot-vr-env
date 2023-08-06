@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://hh6bgu684uci"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_tnvn0"]
+[ext_resource type="Script" path="res://math/AlignText.gd" id="2_2phlp"]
+[ext_resource type="Script" path="res://math/Mul.gd" id="3_fdfnc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qk1dr"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_i4h3o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwo7r"]
+albedo_color = Color(0.501961, 0.501961, 0.501961, 1)
+
+[node name="Mul" type="Node3D"]
+
+[node name="Object" parent="." instance=ExtResource("1_tnvn0")]
+gravity_scale = 0.0
+
+[node name="CollisionShape3D" parent="Object" index="0"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("SphereShape3D_qk1dr")
+
+[node name="Mesh" type="MeshInstance3D" parent="Object"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+mesh = SubResource("SphereMesh_i4h3o")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kwo7r")
+
+[node name="Value" type="Label3D" parent="Object"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+no_depth_test = true
+text = "*"
+script = ExtResource("2_2phlp")
+
+[node name="Math" type="Node" parent="Object"]
+script = ExtResource("3_fdfnc")
+
+[editable path="Object"]

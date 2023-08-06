@@ -43,7 +43,6 @@ func set_obj(n, obj, color):
 func reset(n):
 	n %= 2
 	var obj = selects[n]
-	var got = obj
 	set_mat(selects[n], colors[obj].pop_back())
 	set_text(selects[n], "1")
 	selects[n] = null
@@ -56,6 +55,10 @@ func set_select(obj):
 		set_obj(index, obj, Color(0, 1, 0))
 	else:
 		set_obj(index, obj, Color(0, 0, 1))
+	if selects[0] != null and not selects[0].is_inside_tree():
+		selects[0] = null
+	if selects[1] != null and not selects[1].is_inside_tree():
+		selects[1] = null
 	index += 1
 	if selects[0] == selects[1]:
 		index = 0
@@ -84,7 +87,12 @@ func is_prime(n):
 		m += 2
 	return true 
 
-func _process(delta):
+func _process(_delta):
+	var next_pairs = []
+	for pair in pairs:
+		if pair[0].is_inside_tree() and pair[1].is_inside_tree():
+			next_pairs.append(pair)
+	pairs = next_pairs
 	for child in get_children():
 		remove_child(child)
 	var input_nodes = {}
@@ -100,6 +108,9 @@ func _process(delta):
 	while bad:
 		bad = false
 		for i in output_nodes:
+			var math = i.find_child("Math")
+			if math == null:
+				continue
 			var inputs = []
 			for j in output_nodes[i]:
 				var txt = get_text(j)
@@ -107,13 +118,6 @@ func _process(delta):
 					bad = true
 					continue
 				inputs.append(txt)
-			var total = 0
-			for input in inputs:
-				total += float(input)
-			set_text(i, str(total))
-	var next_pairs = []
+			set_text(i, math.calc(inputs))
 	for pair in pairs:
-		if pair[0].is_inside_tree() and pair[1].is_inside_tree():
-			line(pair[0].global_position, pair[1].global_position, 0.5)
-			next_pairs.append(pair)
-	pairs = next_pairs
+		line(pair[0].global_position, pair[1].global_position, 0.5)

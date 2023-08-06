@@ -1,17 +1,20 @@
 extends XRController3D
 
-var last = false
+var ax_last = false
+var by_last = false
 
 func _ready():
 	pass
-	
+
 func object():
 	return get_node("FunctionPickup").picked_up_object
-		
-func _process(delta):
-	var cur = is_button_pressed("ax_button")
-	if cur and not last:
+
+func _process(_delta):
+	var ax_cur = is_button_pressed("ax_button")
+	var by_cur = is_button_pressed("by_button")
+	if by_cur and not by_last:
 		var obj = object()
-		var lines = get_node("../Lines")
-		lines.set_select(obj)
-	last = cur
+		if obj != null:
+			obj.get_parent().remove_child(obj)
+	by_last = by_cur
+	ax_last = ax_cur

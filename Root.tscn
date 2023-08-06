@@ -37,4 +37,5 @@ script = ExtResource("6_jguux")
 script = ExtResource("9_3f7qv")
 
 [node name="Nodes" type="Node3D" parent="XROrigin3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00165357, -0.000769891, -0.00174108)
+
+[node name="Selects" type="Node3D" parent="XROrigin3D"]

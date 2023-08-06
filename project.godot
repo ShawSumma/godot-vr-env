@@ -25,6 +25,10 @@ XrTools="*res://addons/godot-xr-tools/xr_tools.gd"
 
 project/assembly_name="XR2"
 
+[physics]
+
+3d/default_linear_damp=3.0
+
 [xr]
 
 openxr/enabled=true

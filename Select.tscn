@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkejp465fob7x"]
+
+[ext_resource type="Script" path="res://Select.gd" id="1_1meos"]
+[ext_resource type="PackedScene" uid="uid://f8woloorjuka" path="res://math/Sub.tscn" id="3_gbpqj"]
+[ext_resource type="PackedScene" uid="uid://dexqeioc2pr60" path="res://math/InputSlider.tscn" id="3_ogduw"]
+[ext_resource type="PackedScene" uid="uid://hh6bgu684uci" path="res://math/Mul.tscn" id="4_1p7rc"]
+[ext_resource type="PackedScene" uid="uid://84c0r2v22v7v" path="res://math/Add.tscn" id="4_qwdyq"]
+[ext_resource type="PackedScene" uid="uid://ctbd3bxo25lr3" path="res://math/Div.tscn" id="5_4odt7"]
+
+[node name="Select" type="Node3D"]
+script = ExtResource("1_1meos")
+
+[node name="Add" parent="." instance=ExtResource("4_qwdyq")]
+
+[node name="Sub" parent="." instance=ExtResource("3_gbpqj")]
+
+[node name="Mul" parent="." instance=ExtResource("4_1p7rc")]
+
+[node name="Div" parent="." instance=ExtResource("5_4odt7")]
+
+[node name="InputSlider" parent="." instance=ExtResource("3_ogduw")]
