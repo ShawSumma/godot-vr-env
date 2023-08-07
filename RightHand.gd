@@ -15,6 +15,8 @@ func _process(_delta):
 	if by_cur and not by_last:
 		var obj = object()
 		if obj != null:
-			obj.get_parent().remove_child(obj)
+			var parent = obj.get_parent()
+			if parent != null:
+				parent.remove_child(obj)
 	by_last = by_cur
 	ax_last = ax_cur

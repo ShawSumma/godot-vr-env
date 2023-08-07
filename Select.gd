@@ -24,6 +24,7 @@ func _ready():
 			parent.remove_child(ch)
 			removed += 1
 	if removed != 0:
+		parent.remove_child(self)
 		return
 	for ch in get_children():
 		var sub = Node3D.new()

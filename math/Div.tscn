@@ -26,10 +26,15 @@ mesh = SubResource("SphereMesh_i4h3o")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_kwo7r")
 
-[node name="Value" type="Label3D" parent="Object"]
+[node name="Op" type="Label3D" parent="Object"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 no_depth_test = true
 text = "/"
+script = ExtResource("2_nnsa1")
+
+[node name="Value" type="Label3D" parent="Object"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.07, 0)
+no_depth_test = true
 script = ExtResource("2_nnsa1")
 
 [node name="Math" type="Node" parent="Object"]
